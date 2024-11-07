@@ -17,8 +17,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Persistence\Migrations\" />
-      <Folder Include="Persistence\Repositories\" />
+      <Folder Include="Persistence\Migrations\VeterinaryMigrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Veterinary.CleanArchitecture.Domain\Veterinary.CleanArchitecture.Domain.csproj" />
     </ItemGroup>
 
 </Project>
