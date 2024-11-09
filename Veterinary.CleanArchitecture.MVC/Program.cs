@@ -1,18 +1,22 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Veterinary.CleanArchitecture.Domain.IRepositories;
 using Veterinary.CleanArchitecture.Infrastructure.Data;
+using Veterinary.CleanArchitecture.Infrastructure.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var veterinaryConnection = builder.Configuration.GetConnectionString("VeterinaryConnection");
+var veterinaryConnectionString = builder.Configuration.GetConnectionString("VeterinaryConnection");
+var mediatrHandlersAssembly = Assembly.Load("Veterinary.CleanArchitecture.Application");
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddMediatR(options =>
 {
-   options.RegisterServicesFromAssembly(typeof(Program).Assembly); 
+   options.RegisterServicesFromAssembly(mediatrHandlersAssembly); 
 });
 builder.Services.AddDbContext<ApplicationDatabaseContext>(options =>
 {
-    options.UseMySql(veterinaryConnection,new MySqlServerVersion(new Version(8, 0, 30)));
+    options.UseMySql(veterinaryConnectionString,new MySqlServerVersion(new Version(8, 0, 30)));
 });
 
 var app = builder.Build();
