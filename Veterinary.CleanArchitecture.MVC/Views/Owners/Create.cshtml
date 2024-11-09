@@ -1,0 +1,51 @@
+@model Veterinary.CleanArchitecture.MVC.Models.Owner.CreateOwnerViewModel
+@{
+    ViewBag.Title = "Create owner";
+}
+
+<h1>Create owner</h1>
+@using (Html.BeginForm("CreateOwner", "Owners", FormMethod.Post))
+{
+    <div class="row mb-3">
+        <div class="form-floating col-sm-8">
+            @Html.TextBoxFor(i => i.FullName, new { @class = "form-control", @placeholder = "" })
+            @Html.LabelFor(l => l.FullName, "First and last name")
+        </div>
+        @Html.ValidationMessageFor(e => e.FullName, "", new { @class = "text-danger text small", @id = "error-FullName"})
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-sm-3">
+            <div class="form-floating">
+                @Html.TextBoxFor(i => i.PhoneNumber, new { @class = "form-control", @placeholder = "", @type = "number" })
+                @Html.LabelFor(l => l.PhoneNumber, "Phone number")
+            </div>
+            @Html.ValidationMessageFor(e => e.PhoneNumber, "", new { @class = "text-danger text small", @id = "error-PhoneNumber" })
+        </div>
+        <div class="col-md-6 mb-sm-3">
+            <div class="form-floating">
+                @Html.TextBoxFor(i => i.AlternativePhoneNumber, new { @class = "form-control", @placeholder = "", @type = "number" })
+                @Html.LabelFor(l => l.AlternativePhoneNumber, "Alternative phone number")
+            </div>
+            @Html.ValidationMessageFor(e => e.AlternativePhoneNumber, "", new { @class = "text-danger text small", @id = "error-AlternativePhoneNumber" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="form-floating col-md-6">
+            @Html.TextBoxFor(i => i.Identification, new { @class = "form-control", @placeholder = "", @type = "number" })
+            @Html.LabelFor(l => l.Identification, "Identification")
+        </div>
+        @Html.ValidationMessageFor(e => e.Identification, "", new { @class = "text-danger text small" , @id = "error-Identification"})
+    </div>
+
+    <div class="row mb-3">
+        <div class="form-floating">
+            @Html.TextAreaFor(i => i.ExtraInformation, new { @class="form-control", @placeholder = "", @height="100%"})
+            @Html.LabelFor(l => l.ExtraInformation, "Extra information")
+        </div>
+    </div>
+
+    <input type="submit" value="Send" class="btn btn-primary"/>
+}
+<script src="/js/CreateOwner.js"></script>
